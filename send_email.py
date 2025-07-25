@@ -4,24 +4,14 @@ import os;
 
 load_dotenv();
 
-host = "smtp.gmail.com";
-port = 465;
 
-gmail_account = "tihomirtx88@gmail.com";
-password = os.getenv("EMAIL_PASSWORD")
+def send_email(message, receiver):
+    host = "smtp.gmail.com";
+    port = 465;
+    gmail_account = "tihomirtx88@gmail.com";
+    password = os.getenv("EMAIL_PASSWORD")
+    context = ssl.create_default_context();
 
-reciver = "tihomirtx88@gmail.com";
-
-context = ssl.create_default_context();
-
-message = """\
-Subject: Test Email
-
-Hi,
-How are you,
-Bye
-"""
-
-with smtplib.SMTP_SSL(host, port, context=context) as server:
-    server.login(gmail_account, password);
-    server.sendmail(gmail_account, reciver, message)
+    with smtplib.SMTP_SSL(host, port, context=context) as server:
+        server.login(gmail_account, password);
+        server.sendmail(gmail_account, receiver, message)
